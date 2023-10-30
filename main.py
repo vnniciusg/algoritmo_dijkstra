@@ -4,19 +4,16 @@ import heapq
 
 def constroi_grafo(arquivo):
     with open(arquivo) as f:
-        lines = f.readlines()
-    num_vertices, num_arestas = map(int, lines[0].split())
+        linhas = f.readlines()
+    num_vertices, num_arestas = map(int, linhas[0].split())
 
     grafo = {}
 
-    for line in lines[1:]:
-        valores = line.split()
-        if len(valores) >= 3:
-            origem, peso, destino = map(int, valores)
-
+    for linha in linhas[1:]:
+        origem, peso, destino = map(int, linha.split())
         if origem not in grafo:
-            grafo[origem] = {}
-        grafo[origem][destino] = peso
+            grafo[origem] = []
+        grafo[origem].append((destino, peso))
     return grafo
 
 
@@ -35,7 +32,7 @@ def dijkstra(grafo, origem):
                 menor_distancia = distancias[v]
         visitados.add(vertice_atual)
 
-        for vizinho, peso in grafo[vertice_atual].items():
+        for vizinho, peso in grafo[vertice_atual]:
             if distancias[vertice_atual] + peso < distancias[vizinho]:
                 distancias[vizinho] = distancias[vertice_atual] + peso
     return distancias
