@@ -14,6 +14,7 @@ def constroi_grafo(arquivo):
         if origem not in grafo:
             grafo[origem] = []
         grafo[origem].append((destino, peso))
+
     return grafo
 
 
@@ -41,6 +42,7 @@ def dijkstra(grafo, origem):
 origem = 1
 
 grafo = constroi_grafo("rotas_casa_faculdade.txt")
+print("Grafo : ", grafo)
 
 distancia_minima = dijkstra(grafo, origem)
 for destino, distancia in distancia_minima.items():
